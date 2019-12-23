@@ -1,29 +1,36 @@
-const fs = require('fs');
-const util = require('util');
+const { Sequelize, Model, DataTypes } = require('sequelize');
 
-const readFile = util.promisify(fs.readFile);
-const writeFile = util.promisify(fs.writeFile);
+const sequelize = new Sequelize({
+  dialect: 'sqlite',
+  storage: './data/database.sqlite',
+});
+
+class Feedback extends Model {}
+
+Feedback.init(
+  {
+    name: DataTypes.STRING,
+    title: DataTypes.STRING,
+    message: DataTypes.STRING,
+    createdAt: DataTypes.DATE,
+  },
+  { sequelize, modelName: 'feedbacks' },
+);
 
 class FeedbackService {
   constructor(dataFile) {
     this.dataFile = dataFile;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   async addEntry(name, title, message) {
-    const data = await this.getData();
-    data.unshift({ name, title, message });
-    return writeFile(this.dataFile, JSON.stringify(data));
+    return Feedback.create({ name, title, message });
   }
 
+  // eslint-disable-next-line class-methods-use-this
   async getList() {
-    const data = await this.getData();
+    const data = await Feedback.findAll();
     return data;
-  }
-
-  async getData() {
-    const data = await readFile(this.dataFile, 'utf8');
-    if (!data) return [];
-    return JSON.parse(data);
   }
 }
 
