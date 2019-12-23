@@ -21,3 +21,5 @@ Download [Docker Desktop](https://www.docker.com/products/docker-desktop) for Ma
 ```
 docker-compose up -d
 ```
+
+The website will be running at [http://localhost:3080/](http://localhost:3080/).
