@@ -1,0 +1,80 @@
+version: "2.4"
+
+networks:
+  conference-services:
+
+services:
+  rabbitmq:
+    image: "bitnami/rabbitmq:latest"
+    networks:
+      - conference-services
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    environment:
+      - RABBITMQ_PASSWORD=adm_i_
+      - RABBITMQ_USERNAME=admin
+  registry:
+    restart: always
+    build:
+      context: ./service-registry
+      target: dev
+    ports:
+      - 3000:3000
+    volumes:
+      - ./service-registry:/app
+    networks:
+      - conference-services
+    healthcheck:
+      test: curl http://localhost:3000/find/awesome/1.0 || exit 1
+  speakers:
+    restart: always
+    build:
+      context: ./speakers-service
+      target: dev
+      args:
+        PORT: 3500
+        REGISTRY_URL: http://registry:3000/register/
+    ports:
+      - 3500:3500
+    volumes:
+      - ./speakers-service:/app
+    networks:
+      - conference-services
+    depends_on:
+      registry:
+        condition: service_healthy
+  feedback:
+    restart: always
+    build:
+      context: ./feedback-service
+      target: dev
+      args:
+        PORT: 3600
+        REGISTRY_URL: http://registry:3000/register/
+    ports:
+      - 3600:3600
+    volumes:
+      - ./feedback-service:/app
+    networks:
+      - conference-services
+    depends_on:
+      registry:
+        condition: service_healthy
+  conference:
+    restart: always
+    build:
+      context: ./conference-app
+      target: dev
+      args:
+        REGISTRY_HOST: http://registry:3000
+    ports:
+      - 3080:3080
+      - 9229:9229
+    volumes:
+      - ./conference-app:/app
+    networks:
+      - conference-services
+    depends_on:
+      registry:
+        condition: service_healthy
