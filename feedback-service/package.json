@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "A service to manage feedback",
   "scripts": {
-    "start": "node bin/run | bunyan"
+    "start": "node bin/run | bunyan",
+    "dev": "nodemon bin/run --inspect=0.0.0.0:9229"
   },
   "keywords": [],
   "author": "",
@@ -13,13 +14,16 @@
     "axios": "0.19.0",
     "body-parser": "1.19.0",
     "bunyan": "^1.8.12",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "sequelize": "5.21.3",
+    "sqlite3": "^4.1.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
     "eslint": "^5.14.1",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.16.0"
+    "eslint-plugin-import": "^2.16.0",
+    "nodemon": "2.0.2"
   }
 }

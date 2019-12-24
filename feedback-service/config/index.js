@@ -17,8 +17,9 @@ module.exports = {
     name,
     version,
     serviceTimeout: 30,
-    data: {
-      feedback: path.join(__dirname, '../data/feedback.json'),
+    dbConfig: {
+      dialect: 'sqlite',
+      storage: './data/database.sqlite',
     },
     log: () => getLogger(name, version, 'debug'),
   },
@@ -26,8 +27,9 @@ module.exports = {
     name,
     version,
     serviceTimeout: 30,
-    data: {
-      feedback: path.join(__dirname, '../data/feedback.json'),
+    dbConfig: {
+      dialect: 'sqlite',
+      storage: './data/database.sqlite',
     },
     log: () => getLogger(name, version, 'info'),
   },
@@ -35,9 +37,9 @@ module.exports = {
     name,
     version,
     serviceTimeout: 30,
-    data: {
-      speakers: path.join(__dirname, '../data/speakers.json'),
-      images: path.join(__dirname, '../data/images'),
+    dbConfig: {
+      dialect: 'sqlite',
+      storage: './data/database.sqlite',
     },
     log: () => getLogger(name, version, 'fatal'),
   },
