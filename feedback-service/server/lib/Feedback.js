@@ -1,37 +1,31 @@
 const { Sequelize, Model, DataTypes } = require('sequelize');
 
-const sequelize = new Sequelize({
-  dialect: 'sqlite',
-  storage: './data/database.sqlite',
-});
+module.exports = function feedbackBuilder({ dbConfig }) {
+  const sequelize = new Sequelize(dbConfig);
 
-class Feedback extends Model {}
+  class Feedback extends Model {}
 
-Feedback.init(
-  {
-    name: DataTypes.STRING,
-    title: DataTypes.STRING,
-    message: DataTypes.STRING,
-    createdAt: DataTypes.DATE,
-  },
-  { sequelize, modelName: 'feedbacks' },
-);
+  Feedback.init(
+    {
+      name: DataTypes.STRING,
+      title: DataTypes.STRING,
+      message: DataTypes.STRING,
+      createdAt: DataTypes.DATE,
+    },
+    { sequelize, modelName: 'feedbacks' },
+  );
 
-class FeedbackService {
-  constructor(dataFile) {
-    this.dataFile = dataFile;
+  class FeedbackService {
+    // eslint-disable-next-line class-methods-use-this
+    async addEntry(name, title, message) {
+      return Feedback.create({ name, title, message });
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    async getList() {
+      const data = await Feedback.findAll();
+      return data;
+    }
   }
-
-  // eslint-disable-next-line class-methods-use-this
-  async addEntry(name, title, message) {
-    return Feedback.create({ name, title, message });
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  async getList() {
-    const data = await Feedback.findAll();
-    return data;
-  }
-}
-
-module.exports = FeedbackService;
+  return new FeedbackService();
+};
