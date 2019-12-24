@@ -4,7 +4,7 @@
   "description": "A service to manage feedback",
   "scripts": {
     "start": "node bin/run | bunyan",
-    "dev": "nodemon bin/run --inspect=0.0.0.0:9229 --watch server bin"
+    "dev": "nodemon bin/run --inspect=0.0.0.0:9229"
   },
   "keywords": [],
   "author": "",

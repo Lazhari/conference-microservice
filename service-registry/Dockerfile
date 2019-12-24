@@ -19,9 +19,8 @@ CMD ["npm", "start"]
 
 FROM base as dev 
 ENV NODE_ENV=development
-ENV PATH=/opt/node_modules/.bin:$PATH
 RUN npm install --only=development
-CMD ["npm", "start"]
+CMD ["nodemon", "./bin/run", "--inspect=0.0.0.0:9229"]
 
 FROM base as prod
 COPY . .
