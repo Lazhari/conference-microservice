@@ -23,7 +23,9 @@ module.exports = function feedbackBuilder({ dbConfig }) {
 
     // eslint-disable-next-line class-methods-use-this
     async getList() {
-      const data = await Feedback.findAll();
+      const data = await Feedback.findAll({
+        order: [['createdAt', 'DESC']],
+      });
       return data;
     }
   }
