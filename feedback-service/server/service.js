@@ -3,12 +3,12 @@ const amqplib = require('amqplib');
 
 const service = express();
 
-const Feedback = require('./lib/Feedback');
+const feedbackBuilder = require('./lib/Feedback');
 
 module.exports = (config) => {
-  const feedback = new Feedback(config.data.feedback);
+  const feedback = feedbackBuilder(config);
   const log = config.log();
-
+  // Set up the RabbitMQ consumer for the feedback service
   const q = 'feedback';
   amqplib
     .connect(process.env.RABBIT_HOST || 'amqp://admin:adm_i_@rabbitmq')
