@@ -14,6 +14,8 @@ const config = configs[app.get('env')];
 const speakers = new Speakers(config);
 const feedback = new Feedback(config);
 
+const log = config.log();
+
 app.set('view engine', 'pug');
 if (app.get('env') === 'development') {
   app.locals.pretty = true;
@@ -57,6 +59,11 @@ app.use((err, req, res, next) => {
   return res.render('error');
 });
 
-app.listen(3080);
+app.listen(3080, (error) => {
+  if (error) {
+    log.error(error);
+  }
+  log.debug('The conference app running on http://localhost:3080');
+});
 
 module.export = app;
