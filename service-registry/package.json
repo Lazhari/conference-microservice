@@ -1,6 +1,6 @@
 {
   "name": "service-registry",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A generic service registry for Node.js",
   "scripts": {
     "start": "node bin/run | bunyan",
