@@ -1,0 +1,14 @@
+{
+  "restartable": "rs",
+  "ignore": [".git", "node_modules/**/node_modules", ".vscode", "data"],
+  "verbose": true,
+  "exec": "node --inspect=0.0.0.0:9229",
+  "execMap": {
+    "js": "node --harmony"
+  },
+  "watch": ["server", "config", "bin"],
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "ext": "js,json"
+}

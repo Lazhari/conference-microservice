@@ -34,8 +34,9 @@ CMD ["npm", "start"]
 
 FROM base as dev 
 ENV NODE_ENV=development
-RUN npm install --only=development
-CMD ["nodemon", "./server", "--inspect=0.0.0.0:9229"]
+RUN npm install --only=development \
+  && npm cache clean --force
+CMD ["nodemon", "server"]
 
 FROM base as prod
 COPY . .

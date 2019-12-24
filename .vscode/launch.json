@@ -5,10 +5,15 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Docker: Attach to Node",
       "type": "node",
       "request": "attach",
-      "name": "Docker: Attach to Node",
-      "remoteRoot": "/app"
+      "port": 9229,
+      "address": "localhost",
+      "localRoot": "${workspaceFolder}/conference-app",
+      "remoteRoot": "/app",
+      "protocol": "inspector",
+      "restart": true
     }
   ]
 }
