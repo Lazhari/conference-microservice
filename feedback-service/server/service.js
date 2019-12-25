@@ -1,12 +1,15 @@
 const express = require('express');
 const amqplib = require('amqplib');
 
+const initDb = require('./models');
+
 const service = express();
 
-const feedbackBuilder = require('./lib/Feedback');
+const Feedback = require('./lib/Feedback');
 
 module.exports = (config) => {
-  const feedback = feedbackBuilder(config);
+  const { Feedback: FeedbackEntity } = initDb(config.dbConfig);
+  const feedback = new Feedback(FeedbackEntity);
   const log = config.log();
   // Set up the RabbitMQ consumer for the feedback service
   const q = 'feedback';
