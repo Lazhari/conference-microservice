@@ -31,6 +31,10 @@ RUN npm config list \
 # Add node_modules bins to the the PATH
 ENV PATH /app/node_modules/.bin:$PATH
 
+# Run Migrations and Seeds
+RUN npm run db:migrate
+RUN npm run db:seed
+
 ENTRYPOINT ["tini", "--"]
 CMD ["npm", "start"]
 
