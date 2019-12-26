@@ -12,6 +12,8 @@ module.exports = {
       title: Sequelize.STRING,
       message: Sequelize.STRING,
       name: Sequelize.STRING,
+      createdAt: Sequelize.DATE,
+      updatedAt: Sequelize.DATE,
     });
   },
 

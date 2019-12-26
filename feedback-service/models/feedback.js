@@ -7,6 +7,8 @@ module.exports = function feedbackBuilder(sequelize) {
       name: DataTypes.STRING,
       title: DataTypes.STRING,
       message: DataTypes.STRING,
+      createdAt: DataTypes.DATE,
+      updatedAt: DataTypes.DATE,
     },
     { sequelize, modelName: 'feedbacks' },
   );
