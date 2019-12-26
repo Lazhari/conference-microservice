@@ -8,7 +8,7 @@
     "database.sqlite"
   ],
   "verbose": true,
-  "watch": ["server", "config", "bin"],
+  "watch": ["server", "config", "bin", "models"],
   "env": {
     "NODE_ENV": "development"
   },
