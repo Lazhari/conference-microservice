@@ -8,7 +8,12 @@ module.exports = {
       return queryInterface.createTable('users', { id: Sequelize.INTEGER });
     */
     return queryInterface.createTable('feedbacks', {
-      id: Sequelize.INTEGER,
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
       title: Sequelize.STRING,
       message: Sequelize.STRING,
       name: Sequelize.STRING,
