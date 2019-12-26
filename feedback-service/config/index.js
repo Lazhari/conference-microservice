@@ -17,30 +17,18 @@ module.exports = {
     name,
     version,
     serviceTimeout: 30,
-    dbConfig: {
-      dialect: 'sqlite',
-      storage: './data/database.sqlite',
-    },
     log: () => getLogger(name, version, 'debug'),
   },
   production: {
     name,
     version,
     serviceTimeout: 30,
-    dbConfig: {
-      dialect: 'sqlite',
-      storage: './data/database.sqlite',
-    },
     log: () => getLogger(name, version, 'info'),
   },
   test: {
     name,
     version,
     serviceTimeout: 30,
-    dbConfig: {
-      dialect: 'sqlite',
-      storage: './data/database.sqlite',
-    },
     log: () => getLogger(name, version, 'fatal'),
   },
 };
