@@ -4,6 +4,7 @@ const router = express.Router();
 
 const speakersRoute = require('./speakers');
 const feedbackRoute = require('./feedback');
+const registrationRouter = require('./registration');
 
 module.exports = (param) => {
   const { speakers } = param;
@@ -39,6 +40,7 @@ module.exports = (param) => {
 
   router.use('/speakers', speakersRoute(param));
   router.use('/feedback', feedbackRoute(param));
+  router.use('/registration', registrationRouter());
 
   return router;
 };
